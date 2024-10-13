@@ -1,24 +1,39 @@
-# README
+## dockerコンテナ生成手順
+```bash
+# dockerイメージを生成
+docker-compose build
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# dockerコンテナを生成・起動
+docker-compose up
+```
 
-Things you may want to cover:
 
-* Ruby version
+## docker-rails7環境の作成手順
+```bash
+# ディレクトリの作成
+mkdir [directory_name]
 
-* System dependencies
+# ディレクトリに移動
+cd [directory_name]
 
-* Configuration
+# Ruby3.2.2がインストールされたコンテナを起動してシェルを起動
+# Macの場合
+docker run --rm -ti -v ./rails-practice:/app ruby:3.2.2-alpine sh
+# Windowsの場合
+docker run --rm -ti -v "$(pwd)/boards:/app" ruby:3.2.2-alpine sh
 
-* Database creation
+# パッケージリストを更新する
+apk update
 
-* Database initialization
+# Railsでアプリケーションを作成する際に必要なパッケージをインストールする
+apk add g++ make mysql-dev tzdata
 
-* How to run the test suite
+# RubyGemシステム（gemそのもの）をアップデートする
+gem update --system
 
-* Services (job queues, cache servers, search engines, etc.)
+# Railsのインストールバージョンを指定する
+gem install rails -v 7.0.6
 
-* Deployment instructions
-
-* ...
+# プロジェクトを作成する
+rails new /app --force --database=mysql --skip-bundle --skip-test
+```
