@@ -37,3 +37,9 @@ gem install rails -v 7.0.6
 # プロジェクトを作成する
 rails new /app --force --database=mysql --skip-bundle --skip-test
 ```
+
+## アノテーション生成コマンド
+```bash
+# モデル作成後に以下のコマンドを実行する
+docker-compose exec web bundle exec annotate --models
+```
